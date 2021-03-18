@@ -18,6 +18,22 @@ public class MinesweeperBoard {
         board = placeBombs(7, 16, 0.2);
     }
     
+    public static int[][] calcBombCoutn(boolean[][] bombs) {
+        int[][] bombCount = new int[bombs.length][bombs[0].length]; // Stopper-Trick
+        
+        for(int r = 1; r <= bombs.length; r++) {
+            for(int c = 1; c <= bombs[0].length; c++) {
+                if(!bombs[r][c]) {
+                    
+                } else {
+                    
+                }
+            }
+        }
+        
+        return bombCount;
+    }
+    
     public static boolean[][] placeBombs(int rows, int columns, double probability) {
         boolean[][] bombs = new boolean[rows + 2][columns + 2];
         
