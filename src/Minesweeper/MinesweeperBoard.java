@@ -17,6 +17,17 @@ public class MinesweeperBoard {
         
     }
     
+    public static boolean[][] placeBombs(int rows, int columns, double probability) {
+        boolean[][] bombs = new boolean[rows + 2][columns + 2];
+        
+        for(int r = 1; r <= bombs.length - 2; r++) {
+            for(int c = 1; c <= bombs[0].length - 2; c++) {
+                bombs[r][c] = Math.random() < probability ? true : false;
+            }       
+        }       
+        return bombs;
+    }
+    
     public static void main(String[] args) {
         
     }
