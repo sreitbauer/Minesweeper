@@ -16,6 +16,7 @@ public class MinesweeperBoard {
     
     public MinesweeperBoard() {
         board = placeBombs(7, 16, 0.2);
+        bombCounter = calcBombCoutn(board);
     }
     
     public static int[][] calcBombCoutn(boolean[][] bombs) {
@@ -24,9 +25,13 @@ public class MinesweeperBoard {
         for(int r = 1; r <= bombs.length - 2; r++) {
             for(int c = 1; c <= bombs[0].length - 2; c++) {
                 if(!bombs[r][c]) {
-                    
+                    for(Direction d : Direction.values()) {
+                        if(bombs[r + d.dy][c + d.dx]) {
+                            bombCount[r][c]++;
+                        }
+                    }
                 } else {
-                    
+                    bombCount[r][c] = 9;
                 }
             }
         }
@@ -49,6 +54,12 @@ public class MinesweeperBoard {
         for(int r = 1; r <= board.length - 2; r++) {
             for(int c = 1; c <= board[0].length - 2; c++) {
                 System.out.print(board[r][c] ? "*" : ".");
+            }
+            
+            System.out.print(" ");
+            
+            for(int c = 1; c <= board[0].length - 2; c++) {
+                System.out.print(bombCounter[r][c]);
             }
             System.out.println("");
         }
