@@ -21,8 +21,8 @@ public class MinesweeperBoard {
     public static int[][] calcBombCoutn(boolean[][] bombs) {
         int[][] bombCount = new int[bombs.length][bombs[0].length]; // Stopper-Trick
         
-        for(int r = 1; r <= bombs.length; r++) {
-            for(int c = 1; c <= bombs[0].length; c++) {
+        for(int r = 1; r <= bombs.length - 2; r++) {
+            for(int c = 1; c <= bombs[0].length - 2; c++) {
                 if(!bombs[r][c]) {
                     
                 } else {
