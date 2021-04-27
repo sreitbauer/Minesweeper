@@ -16,9 +16,8 @@ import javax.swing.JToggleButton;
  */
 public class GUI extends javax.swing.JFrame {
 
-    /**
-     * Creates new form GUI
-     */
+    private MinesweeperBoard board;
+    
     public GUI() {
         initComponents();
         setSize(600, 600);
@@ -72,6 +71,8 @@ public class GUI extends javax.swing.JFrame {
 
     private void onSizeChange(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onSizeChange
         int rows = 10, columns = 10;
+        board = new MinesweeperBoard(rows, columns, 0.2f);
+        board.printBoard();
         
         plButtons.removeAll();
         plButtons.setLayout(new GridLayout(rows, columns));
@@ -83,8 +84,9 @@ public class GUI extends javax.swing.JFrame {
                 toggleButton.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        System.out.println(toggleButton.getText());
-                        
+                        int x = Integer.parseInt(toggleButton.getText().split(" ")[0]);
+                        int y = Integer.parseInt(toggleButton.getText().split(" ")[1]);
+                        System.out.println(x + " " + y);
                     }
                 });
                 plButtons.add(toggleButton);

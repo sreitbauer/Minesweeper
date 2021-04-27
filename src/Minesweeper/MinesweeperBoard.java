@@ -14,12 +14,12 @@ public class MinesweeperBoard {
     private boolean[][] board;
     private int[][] bombCounter;
     
-    public MinesweeperBoard() {
-        board = placeBombs(7, 16, 0.2);
-        bombCounter = calcBombCoutn(board);
+    public MinesweeperBoard(int r, int c, float prob) {
+        board = placeBombs(r, c, prob);
+        bombCounter = calcBombCount(board);
     }
     
-    public static int[][] calcBombCoutn(boolean[][] bombs) {
+    public static int[][] calcBombCount(boolean[][] bombs) {
         int[][] bombCount = new int[bombs.length][bombs[0].length]; // Stopper-Trick
         
         for(int r = 1; r <= bombs.length - 2; r++) {
@@ -64,9 +64,4 @@ public class MinesweeperBoard {
             System.out.println("");
         }
     }
-    
-    /*public static void main(String[] args) {
-        MinesweeperBoard board = new MinesweeperBoard();
-        board.printBoard();
-    }*/
 }
