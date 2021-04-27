@@ -6,6 +6,8 @@
 package Minesweeper;
 
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JToggleButton;
 
 /**
@@ -19,6 +21,7 @@ public class GUI extends javax.swing.JFrame {
      */
     public GUI() {
         initComponents();
+        setSize(600, 600);
     }
     
     /**
@@ -31,15 +34,6 @@ public class GUI extends javax.swing.JFrame {
     private void initComponents() {
 
         plButtons = new javax.swing.JPanel();
-        jToggleButton1 = new javax.swing.JToggleButton();
-        jToggleButton2 = new javax.swing.JToggleButton();
-        jToggleButton3 = new javax.swing.JToggleButton();
-        jToggleButton5 = new javax.swing.JToggleButton();
-        jToggleButton6 = new javax.swing.JToggleButton();
-        jToggleButton7 = new javax.swing.JToggleButton();
-        jToggleButton9 = new javax.swing.JToggleButton();
-        jToggleButton10 = new javax.swing.JToggleButton();
-        jToggleButton8 = new javax.swing.JToggleButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -50,88 +44,6 @@ public class GUI extends javax.swing.JFrame {
         setTitle("Minesweeper");
 
         plButtons.setLayout(new java.awt.GridLayout(3, 3));
-
-        jToggleButton1.setText("jToggleButton1");
-        jToggleButton1.setActionCommand("r1c1");
-        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                onButtonClick(evt);
-            }
-        });
-        plButtons.add(jToggleButton1);
-
-        jToggleButton2.setText("jToggleButton1");
-        jToggleButton2.setActionCommand("r1c2");
-        jToggleButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                onButtonClick(evt);
-            }
-        });
-        plButtons.add(jToggleButton2);
-
-        jToggleButton3.setText("jToggleButton1");
-        jToggleButton3.setActionCommand("r1c3");
-        jToggleButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                onButtonClick(evt);
-            }
-        });
-        plButtons.add(jToggleButton3);
-
-        jToggleButton5.setText("jToggleButton1");
-        jToggleButton5.setActionCommand("r2c1");
-        jToggleButton5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                onButtonClick(evt);
-            }
-        });
-        plButtons.add(jToggleButton5);
-
-        jToggleButton6.setText("jToggleButton1");
-        jToggleButton6.setActionCommand("r2c2");
-        jToggleButton6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                onButtonClick(evt);
-            }
-        });
-        plButtons.add(jToggleButton6);
-
-        jToggleButton7.setText("jToggleButton1");
-        jToggleButton7.setActionCommand("r2c3");
-        jToggleButton7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                onButtonClick(evt);
-            }
-        });
-        plButtons.add(jToggleButton7);
-
-        jToggleButton9.setText("jToggleButton1");
-        jToggleButton9.setActionCommand("r3c4");
-        jToggleButton9.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                onButtonClick(evt);
-            }
-        });
-        plButtons.add(jToggleButton9);
-
-        jToggleButton10.setText("jToggleButton1");
-        jToggleButton10.setActionCommand("r3c2");
-        jToggleButton10.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                onButtonClick(evt);
-            }
-        });
-        plButtons.add(jToggleButton10);
-
-        jToggleButton8.setText("jToggleButton1");
-        jToggleButton8.setActionCommand("r3c3");
-        jToggleButton8.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                onButtonClick(evt);
-            }
-        });
-        plButtons.add(jToggleButton8);
-
         getContentPane().add(plButtons, java.awt.BorderLayout.CENTER);
 
         jMenu1.setText("File");
@@ -158,15 +70,28 @@ public class GUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void onButtonClick(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onButtonClick
-        System.out.println(evt.getActionCommand());
-    }//GEN-LAST:event_onButtonClick
-
     private void onSizeChange(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onSizeChange
-        int r = 10, c = 10;
+        int rows = 10, columns = 10;
         
         plButtons.removeAll();
-        plButtons.setLayout(new GridLayout(r, c));
+        plButtons.setLayout(new GridLayout(rows, columns));
+        
+        for(int r = 1; r <= rows; r++) {
+            for(int c = 1; c <= columns; c++) {
+                JToggleButton toggleButton = new JToggleButton();
+                toggleButton.setText(r + " " + c);
+                toggleButton.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        System.out.println(toggleButton.getText());
+                        
+                    }
+                });
+                plButtons.add(toggleButton);
+            }
+        }
+        plButtons.revalidate();
+        plButtons.repaint();
     }//GEN-LAST:event_onSizeChange
 
     /**
@@ -210,15 +135,6 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JToggleButton jToggleButton1;
-    private javax.swing.JToggleButton jToggleButton10;
-    private javax.swing.JToggleButton jToggleButton2;
-    private javax.swing.JToggleButton jToggleButton3;
-    private javax.swing.JToggleButton jToggleButton5;
-    private javax.swing.JToggleButton jToggleButton6;
-    private javax.swing.JToggleButton jToggleButton7;
-    private javax.swing.JToggleButton jToggleButton8;
-    private javax.swing.JToggleButton jToggleButton9;
     private javax.swing.JPanel plButtons;
     // End of variables declaration//GEN-END:variables
 }

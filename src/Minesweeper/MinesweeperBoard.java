@@ -65,8 +65,8 @@ public class MinesweeperBoard {
         }
     }
     
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         MinesweeperBoard board = new MinesweeperBoard();
         board.printBoard();
-    }
+    }*/
 }
