@@ -25,8 +25,7 @@ public class MinesweeperBoard {
                     bombCount[r][c] = 9;
                 }
             }
-        }
-        
+        }      
         return bombCount;
     }
     
