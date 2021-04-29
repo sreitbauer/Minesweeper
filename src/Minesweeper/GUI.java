@@ -115,13 +115,25 @@ public class GUI extends javax.swing.JFrame {
                 board.save(file);
             } catch(FileNotFoundException ex) {
                 JOptionPane.showMessageDialog(this, ex, "Fehler", JOptionPane.ERROR_MESSAGE);
+                ex.printStackTrace();
+
             }
             
         }
     }//GEN-LAST:event_onSave
 
     private void onLoad(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onLoad
-        // TODO add your handling code here:
+        JFileChooser fc = new JFileChooser();
+        if(fc.showOpenDialog(this) == APPROVE_OPTION) {
+            File file = fc.getSelectedFile();
+            try {
+                board.open(file);
+            } catch(Exception ex) {
+                JOptionPane.showMessageDialog(this, ex, "Fehler", JOptionPane.ERROR_MESSAGE);
+                ex.printStackTrace();
+            }
+            
+        }
     }//GEN-LAST:event_onLoad
 
     public static void main(String args[]) {

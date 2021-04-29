@@ -3,6 +3,7 @@ package Minesweeper;
 import java.awt.Component;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class MinesweeperBoard {
     
@@ -71,5 +72,24 @@ public class MinesweeperBoard {
         DAL dal = new DAL();
         
         dal.save(bombCounter, file);
+    }
+
+    void open(File file) throws FileNotFoundException, IOException {
+        DAL dal = new DAL();
+        
+        this.bombCounter = dal.load(file);
+        
+        int row = bombCounter.length, column = bombCounter[0].length;
+        this.board = new boolean[row][column];
+        
+        for(int r = 0; r < row; r++) {
+            for(int c = 0; c < column; c++) {
+                if(bombCounter[r][c] == 9) {
+                    board[r][c] = true;
+                }
+            }
+        }
+        
+        this.printBoard();
     }
 }
