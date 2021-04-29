@@ -1,9 +1,16 @@
 package Minesweeper;
 
+import java.awt.Component;
+import java.io.File;
+import java.io.FileNotFoundException;
+
 public class MinesweeperBoard {
     
     private boolean[][] board;
     private int[][] bombCounter;
+    
+    private Component[] buttons;
+
     
     public MinesweeperBoard(int r, int c, float prob) {
         board = placeBombs(r, c, prob);
@@ -53,5 +60,16 @@ public class MinesweeperBoard {
             }
             System.out.println("");
         }
+    }
+
+    public void setButtons(Component[] components) {
+        System.out.println(components.length);
+        this.buttons = components;
+    }
+
+    public void save(File file) throws FileNotFoundException {
+        DAL dal = new DAL();
+        
+        dal.save(bombCounter, file);
     }
 }

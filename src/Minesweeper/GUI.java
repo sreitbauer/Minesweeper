@@ -3,6 +3,11 @@ package Minesweeper;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileNotFoundException;
+import javax.swing.JFileChooser;
+import static javax.swing.JFileChooser.APPROVE_OPTION;
+import javax.swing.JOptionPane;
 import javax.swing.JToggleButton;
 
 public class GUI extends javax.swing.JFrame {
@@ -21,6 +26,8 @@ public class GUI extends javax.swing.JFrame {
         plButtons = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -32,6 +39,22 @@ public class GUI extends javax.swing.JFrame {
         getContentPane().add(plButtons, java.awt.BorderLayout.CENTER);
 
         jMenu1.setText("File");
+
+        jMenuItem3.setText("Speichern");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                onSave(evt);
+            }
+        });
+        jMenu1.add(jMenuItem3);
+
+        jMenuItem4.setText("Laden");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                onLoad(evt);
+            }
+        });
+        jMenu1.add(jMenuItem4);
 
         jMenuItem1.setText("Beenden");
         jMenu1.add(jMenuItem1);
@@ -57,7 +80,7 @@ public class GUI extends javax.swing.JFrame {
 
     private void onSizeChange(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onSizeChange
         int rows = 10, columns = 10;
-        board = new MinesweeperBoard(rows, columns, 0.2f);
+        board = new MinesweeperBoard(rows, columns, 0.07f);
         board.printBoard();
         
         plButtons.removeAll();
@@ -78,9 +101,28 @@ public class GUI extends javax.swing.JFrame {
                 plButtons.add(toggleButton);
             }
         }
+        board.setButtons(plButtons.getComponents());
+        
         plButtons.revalidate();
         plButtons.repaint();
     }//GEN-LAST:event_onSizeChange
+
+    private void onSave(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onSave
+        JFileChooser fc = new JFileChooser();
+        if(fc.showSaveDialog(this) == APPROVE_OPTION) {
+            File file = fc.getSelectedFile();
+            try {
+                board.save(file);
+            } catch(FileNotFoundException ex) {
+                JOptionPane.showMessageDialog(this, ex, "Fehler", JOptionPane.ERROR_MESSAGE);
+            }
+            
+        }
+    }//GEN-LAST:event_onSave
+
+    private void onLoad(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onLoad
+        // TODO add your handling code here:
+    }//GEN-LAST:event_onLoad
 
     public static void main(String args[]) {
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -118,6 +160,8 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JPanel plButtons;
     // End of variables declaration//GEN-END:variables
 }
