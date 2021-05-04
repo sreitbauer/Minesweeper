@@ -1,9 +1,17 @@
 package Minesweeper;
 
+import java.awt.Component;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 public class MinesweeperBoard {
     
     private boolean[][] board;
     private int[][] bombCounter;
+    
+    private Component[] buttons;
+
     
     public MinesweeperBoard(int r, int c, float prob) {
         board = placeBombs(r, c, prob);
@@ -25,7 +33,11 @@ public class MinesweeperBoard {
                     bombCount[r][c] = 9;
                 }
             }
+<<<<<<< HEAD
         }        
+=======
+        }      
+>>>>>>> 670b3abb25add57d841e7451b355ef3b9ec8115b
         return bombCount;
     }
     
@@ -53,5 +65,35 @@ public class MinesweeperBoard {
             }
             System.out.println("");
         }
+    }
+
+    public void setButtons(Component[] components) {
+        System.out.println(components.length);
+        this.buttons = components;
+    }
+
+    public void save(File file) throws FileNotFoundException {
+        DAL dal = new DAL();
+        
+        dal.save(bombCounter, file);
+    }
+
+    void open(File file) throws FileNotFoundException, IOException {
+        DAL dal = new DAL();
+        
+        this.bombCounter = dal.load(file);
+        
+        int row = bombCounter.length, column = bombCounter[0].length;
+        this.board = new boolean[row][column];
+        
+        for(int r = 0; r < row; r++) {
+            for(int c = 0; c < column; c++) {
+                if(bombCounter[r][c] == 9) {
+                    board[r][c] = true;
+                }
+            }
+        }
+        
+        this.printBoard();
     }
 }
